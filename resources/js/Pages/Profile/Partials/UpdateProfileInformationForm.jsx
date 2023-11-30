@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import Swal from 'sweetalert2';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const user = usePage().props.auth.user;
@@ -11,12 +12,29 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
+        role: user.role,
     });
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        try {
+            await patch(route('profile.update'));
+            // Show SweetAlert on success
+            Swal.fire({
+                icon: 'success',
+                title: 'Saved!',
+                showConfirmButton: false,
+                timer: 2000,
+            });
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            });
+        }
     };
 
     return (
@@ -30,7 +48,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
-                <div>
+                <div className="w-full sm:w-1/2">
                     <InputLabel htmlFor="name" value="Name" />
 
                     <TextInput
@@ -46,7 +64,22 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
-                <div>
+                <div className="w-full sm:w-1/2">
+                    <InputLabel htmlFor="role" value="Role" />
+
+                    <TextInput
+                        id="role"
+                        className="mt-1 block w-full bg-gray-200" // Apply a grey background color
+                        value={data.role}
+                        onChange={(e) => setData('role', e.target.value)}
+                        disabled
+                        autoComplete="role"
+                    />
+
+                    <InputError className="mt-2" message={errors.role} />
+                </div>
+
+                <div className="w-full">
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
@@ -63,7 +96,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
-                    <div>
+                    <div className="w-full">
                         <p className="text-sm mt-2 text-gray-800">
                             Your email address is unverified.
                             <Link
@@ -84,7 +117,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
 
                     <Transition

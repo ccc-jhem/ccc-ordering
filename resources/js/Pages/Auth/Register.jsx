@@ -10,6 +10,7 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        role: '',
         password: '',
         password_confirmation: '',
     });
@@ -64,6 +65,26 @@ export default function Register() {
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
+
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="Role" value="Role" />
+
+                    <TextInput
+                        id="role"
+                        name="role"
+                        value={data.role}
+                        className="mt-1 block w-full"
+                        autoComplete="name"
+                        isFocused={true}
+                        onChange={(e) => setData('role', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.role} className="mt-2" />
+                </div>
+
+             
 
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />

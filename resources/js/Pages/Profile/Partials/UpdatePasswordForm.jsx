@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import Swal from 'sweetalert2';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const passwordInput = useRef();
@@ -16,24 +17,56 @@ export default function UpdatePasswordForm({ className = '' }) {
         password_confirmation: '',
     });
 
-    const updatePassword = (e) => {
+    const updatePassword = async (e) => {
         e.preventDefault();
-
-        put(route('password.update'), {
-            preserveScroll: true,
-            onSuccess: () => reset(),
-            onError: (errors) => {
-                if (errors.password) {
-                    reset('password', 'password_confirmation');
-                    passwordInput.current.focus();
-                }
-
-                if (errors.current_password) {
-                    reset('current_password');
-                    currentPasswordInput.current.focus();
-                }
-            },
-        });
+        try {
+            await put(route('password.update'), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    reset();
+    
+                    // Show SweetAlert on success
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Password Updated!',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                },
+                onError: (errors) => {
+                    // Handle errors here if needed
+                    console.error('Error updating password:', errors);
+    
+                    // Show SweetAlert on error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+    
+                    // Reset the form or handle errors as needed
+                    if (errors.password) {
+                        reset('password', 'password_confirmation');
+                        passwordInput.current.focus();
+                    }
+    
+                    if (errors.current_password) {
+                        reset('current_password');
+                        currentPasswordInput.current.focus();
+                    }
+                },
+            });
+        } catch (error) {
+            // Handle exceptions here if needed
+            console.error('Exception updating password:', error);
+    
+            // Show SweetAlert on exception
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            });
+        }
     };
 
     return (

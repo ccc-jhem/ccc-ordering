@@ -44,7 +44,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             href={route('login')}
                             className="px-6 py-3 bg-pink-800 text-white rounded-md hover:bg-pink-600 focus:outline-none focus:shadow-outline-pink active:bg-pink-800"
                         >
-                            Log in
+                           Go to Login Page
                         </Link>
                     </div>
                 </div>
