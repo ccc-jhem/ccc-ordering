@@ -13,7 +13,7 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
@@ -21,10 +21,22 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // Check the user's role and redirect accordingly
+                switch (Auth::user()->role) {
+                    case 'none':
+                        return redirect(RouteServiceProvider::NOTVERIFIED);
+                    case 'salesrep':
+                        return redirect(RouteServiceProvider::SALESREPHOME);
+                    case 'promodiser':
+                        return redirect(RouteServiceProvider::PROMOHOME);
+                    case 'admin':
+                        return redirect(RouteServiceProvider::ADMINHOME);
+                    default:
+                        // Handle any other roles or unexpected cases
+                        return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
-
         return $next($request);
     }
 }

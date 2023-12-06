@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Account\GetUserTypeHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -14,6 +15,14 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
+
+    private GetUserTypeHelper $getUserTypeHelper;
+
+    public function __construct(GetUserTypeHelper $getUserTypeHelper)
+    {
+        $this->getUserTypeHelper = $getUserTypeHelper;
+    }
+
     /**
      * Display the login view.
      */
@@ -32,9 +41,25 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $role = $this->getUserTypeHelper->getUserAccountType($request->email);
+         
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if($role === 'salesrep'){
+            return redirect()->intended(RouteServiceProvider::SALESREPHOME);
+        }
+        if($role === 'promodiser'){
+            return redirect()->intended(RouteServiceProvider::PROMOHOME);
+        }
+        if($role === 'admin'){
+            return redirect()->intended(RouteServiceProvider::ADMINHOME);
+        }
+        if($role === 'none')
+        {
+            return redirect()->intended(RouteServiceProvider::NOTVERIFIED);
+        }
+
+        // return redirect('/');
     }
 
     /**

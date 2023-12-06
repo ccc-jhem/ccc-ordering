@@ -67,22 +67,22 @@ export default function Register() {
                 </div>
 
 
-                <div className="mt-4">
+                {/* <div className="mt-4" hidden>
                     <InputLabel htmlFor="Role" value="Role" />
 
                     <TextInput
                         id="role"
                         name="role"
-                        value={data.role}
+                        value="none"
                         className="mt-1 block w-full"
                         autoComplete="name"
                         isFocused={true}
                         onChange={(e) => setData('role', e.target.value)}
-                        required
+                        disabled
                     />
 
                     <InputError message={errors.role} className="mt-2" />
-                </div>
+                </div> */}
 
              
 

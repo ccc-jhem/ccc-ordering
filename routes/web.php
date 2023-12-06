@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,7 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('auth/login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -25,9 +26,42 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Redirect to login page if accessing the root URL
+Route::redirect('/', '/login');
+
+Route::get('/restricted',  function(){
+    return Inertia::render('RestrictedAccess');
+})->middleware(['auth'])->name('not-verified');
+
+Route::get('/not-verified-user',  function(){
+    return Inertia::render('NotVerifiedUser');
+})->middleware(['auth'])->name('not-verified');
+
+// admin routes
+Route::middleware(['auth', 'admin'])->group(function () {
+    
+    Route::get('/admin/dashboard', function(){
+        return Inertia::render('Admin/Index');
+    })->middleware(['auth'])->name('admin');
+
+    Route::get('/admin/user-list', [UserController::class, 'index']);
+});
+
+
+// sales rep Routes
+Route::middleware(['auth', 'salesrep'])->group(function () {
+    Route::get('/salesrep/dashboard', function(){
+        return Inertia::render('SalesRep/Index');
+    })->middleware(['auth'])->name('sales-rep');
+});  
+
+// promodiser Routes
+Route::middleware(['auth', 'promo'])->group(function () {
+    Route::get('/promo/dashboard', function(){
+        return Inertia::render('Promodiser/Index');
+    })->middleware(['auth'])->name('promo');
+
+}); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

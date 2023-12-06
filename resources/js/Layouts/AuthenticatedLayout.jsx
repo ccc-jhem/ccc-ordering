@@ -8,6 +8,20 @@ import { Link } from '@inertiajs/react';
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
+    const getDashboardLink = () => {
+        const role = user ?.role; // Assuming you have the role information in the user object
+        switch (role) {
+            case 'salesrep':
+                return '/salesrep/dashboard';
+            case 'promodiser':
+                return '/promo/dashboard';
+            case 'admin':
+                return '/admin/dashboard';
+            default:
+                return '/not-verified-user'; // Default for other roles or if the role is not set
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white p-3 border-b border-gray-100">
@@ -15,7 +29,7 @@ export default function Authenticated({ user, header, children }) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/dashboard">
+                                <Link href={getDashboardLink()} >
                                     <ApplicationLogo className="block h-20 w-50 fill-current text-gray-800" />
                                 </Link>
                             </div>

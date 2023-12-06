@@ -4,8 +4,11 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia-react';
+
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -25,6 +28,8 @@ export default function Login({ status, canResetPassword }) {
 
         post(route('login'));
     };
+
+    
 
     return (
         <GuestLayout>
@@ -66,7 +71,7 @@ export default function Login({ status, canResetPassword }) {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="block mt-4">
+                <div className="flex justify-between items-center my-2">
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
@@ -75,21 +80,35 @@ export default function Login({ status, canResetPassword }) {
                         />
                         <span className="ms-2 text-sm text-gray-600">Remember me</span>
                     </label>
-                </div>
 
-                <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="underline text-sm mx-2 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Forgot your password?
+                            Forgot password?
                         </Link>
                     )}
+                 
+                 
+                </div>
+               
+               
+                       
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                <div className="flex items-center justify-center mt-10">
+                        
+                    <Link
+                        href={route('register')}
+                        className="inline-flex items-center px-4 py-2 bg-pink-900 border border-gray-300 rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                    >
+                        Register
+                    </Link>
+
+                    <PrimaryButton className="ms-1" disabled={processing}>
                         Log in
                     </PrimaryButton>
+                 
                 </div>
             </form>
         </GuestLayout>

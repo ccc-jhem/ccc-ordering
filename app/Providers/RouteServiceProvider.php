@@ -17,7 +17,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/login';
+    public const NOTVERIFIED = '/not-verified-user';
+    public const SALESREPHOME = '/salesrep/dashboard';
+    public const PROMOHOME = '/promo/dashboard';
+    public const ADMINHOME = '/admin/dashboard';
+    public const RESTRICT = '/restricted';
+
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

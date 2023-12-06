@@ -42,4 +42,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin'; 
+    }
+
+    public function isSalesRep()
+    {
+        return $this->role === 'salesrep';
+    }
+
+    public function isPromo()
+    {
+        return $this->role === 'promodiser';
+    }
+    
+    public function notApproved()
+    {
+        return $this->role === 'none';
+    }
+
 }

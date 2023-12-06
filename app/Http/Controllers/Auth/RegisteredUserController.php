@@ -40,12 +40,30 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => 'none',
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
+
+        if ($request->role == 'none')
+        {
+            return redirect(RouteServiceProvider::NOTVERIFIED);  
+        }
+        if ($request->role == 'salesrep')
+        {
+            return redirect(RouteServiceProvider::SALESREPHOME); 
+        }
+        if ($request->role == 'promodiser')
+        {
+            return redirect(RouteServiceProvider::PROMOHOME); 
+        }
+        if ($request->role == 'admin')
+        {
+            return redirect(RouteServiceProvider::ADMINHOME); 
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }
