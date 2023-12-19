@@ -45,6 +45,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->middleware(['auth'])->name('admin');
 
     Route::get('/admin/user-list', [UserController::class, 'index']);
+    Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('edit-user');
+    Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('update-user');
 });
 
 

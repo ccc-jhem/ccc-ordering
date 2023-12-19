@@ -95,7 +95,8 @@ export default function Login({ status, canResetPassword }) {
                
                
                        
-
+        
+                <InputError message={errors.status} className="mt-2" />
                 <div className="flex items-center justify-center mt-10">
                         
                     <Link

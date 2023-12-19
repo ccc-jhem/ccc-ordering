@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Inertia } from '@inertiajs/inertia';
 import { Link, Head } from '@inertiajs/react';
 
 
@@ -19,25 +20,23 @@ export default function Users({ auth,users }) {
                             </h1>
 
 
-                            <a href="/admin/dashboard" className="inline-flex items-center px-3 py-2 my-1 bg-black text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring focus:border-blue-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                                </svg>
-                                <span className="text-base">Back</span>
+                            <a href="/" className="inline-flex items-center px-3 py-2 my-1 bg-gray-800 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring focus:border-blue-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                                <span className="text-base"> Back</span>
                             </a>
-
-
                         </div>
                          
-                           
-                        <div className="overflow-x-auto">
+                            <div className="overflow-x-auto">
                                 <table className="min-w-full">
                                     <thead>
                                         <tr>
-                                            <th className="px-3 sm:px-6 py-3 bg-black border-b text-white text-center">Name</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-black border-b text-white text-center">Role</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-black border-b text-white text-center">Email</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-black border-b text-white text-center">Actions</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Name</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Role</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Email</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Status</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,20 +45,30 @@ export default function Users({ auth,users }) {
                                                 <td className="px-3 sm:px-6 py-2 sm:py-3 whitespace-no-wrap border-b text-center">{user.name}</td>
                                                 <td className="px-3 sm:px-6 py-2 sm:py-3 whitespace-no-wrap border-b text-center">{user.role}</td>
                                                 <td className="px-3 sm:px-6 py-2 sm:py-3 whitespace-no-wrap border-b text-center">{user.email}</td>
+                                                <td
+                                                    className={`px-3 sm:px-6 py-2 sm:py-3 whitespace-no-wrap border-b text-center ${
+                                                        user.status === 'active' ? 'text-green-600' : 'text-red-600'
+                                                    }`}
+                                                    >
+                                                    {user.status}
+                                                </td>
+
                                                 <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-no-wrap border-b text-center">
-                                                    <button onClick={() => alert(user.id)} className="bg-sky-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1">
-                                                        Edit
-                                                    </button>
-                                                    <button onClick={() => alert(user.id)} className="bg-red-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1">
-                                                        Archive
-                                                    </button>
+                                                <Link
+                                                     href={`/edit-user/${user.id}`}
+                                                    className="bg-pink-600 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1 inline-flex items-center text-center hover:bg-pink-800 focus:outline-none focus:ring focus:border-blue-300"
+                                                    >
+                                                    <span className="text-base">Update</span>
+                                                </Link>
+                                                {/* <button onClick={() => alert('Archive this user ' + user.id)} className="bg-red-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1">
+                                                    Archive
+                                                </button> */}
                                                 </td>
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>

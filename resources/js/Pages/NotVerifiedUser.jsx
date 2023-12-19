@@ -10,7 +10,7 @@ export default function NotVerifiedUser({ auth }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-4 sm:p-6 text-gray-900">
                             <div className="relative overflow-x-auto">
-                               <h1>You are not yet verified by the admin</h1>
+                               <h1>You are not yet verified please contact the administrator</h1>
                             </div>
                         </div>
                     </div>

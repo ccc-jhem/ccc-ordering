@@ -1,11 +1,12 @@
-// resources/js/components/RestrictedAccess.js
 
-import React from 'react';
 
+import { Link, Head } from '@inertiajs/react';
 
 const RestrictedAccess = () => {
     return (
+       
         <div className="flex items-center justify-center h-screen bg-gray-100">
+             <Head title="Restricted"/>
             <div className="bg-white p-8 rounded shadow-md">
                 <div className="text-red-600 text-4xl mb-4">
                     <i className="fas fa-exclamation-triangle"></i>
