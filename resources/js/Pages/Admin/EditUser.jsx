@@ -80,8 +80,8 @@ const EditUser = ({ userData,auth }) => {
 
 
                                 <a href="/admin/user-list" className="inline-flex items-center px-3 py-2 my-1 bg-black text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring focus:border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                     </svg>
                                     <span className="text-base">Back</span>
                                 </a>

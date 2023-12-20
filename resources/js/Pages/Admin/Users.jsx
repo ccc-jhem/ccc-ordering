@@ -58,7 +58,7 @@ export default function Users({ auth,users }) {
                                                      href={`/edit-user/${user.id}`}
                                                     className="bg-pink-600 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1 inline-flex items-center text-center hover:bg-pink-800 focus:outline-none focus:ring focus:border-blue-300"
                                                     >
-                                                    <span className="text-base">Update</span>
+                                                    <span className="text-base">Edit</span>
                                                 </Link>
                                                 {/* <button onClick={() => alert('Archive this user ' + user.id)} className="bg-red-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1">
                                                     Archive
