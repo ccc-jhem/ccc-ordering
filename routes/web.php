@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ItemsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,6 +48,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/user-list', [UserController::class, 'index']);
     Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('edit-user');
     Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('update-user');
+    // Users controller
+
+    Route::get('admin/item-list', [ItemsController::class, 'index']);
 });
 
 

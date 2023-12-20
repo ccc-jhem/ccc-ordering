@@ -14,7 +14,7 @@ class UserController extends Controller
     //
     public function index()
     {
-        $users = User::where('role', '!=', 'admin')->get(); // You can adjust the number of items per page as needed
+        $users = User::where('role', '!=', 'admin')->get(); 
         return Inertia::render('Admin/Users', [
             'users' => $users,
         ]);

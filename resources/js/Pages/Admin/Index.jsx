@@ -35,7 +35,7 @@ export default function index({ auth }) {
                                     <h2 className="text-2xl font-semibold mb-4">Items</h2>
                                 </div>
                                 <div className="p-1 bg-blue-700 flex items-center justify-center">
-                                    <Link href="/" className="flex items-center text-center text-blue-200 hover:underline py-2 px-4 rounded-md">
+                                    <Link href="/admin/item-list" className="flex items-center text-center text-blue-200 hover:underline py-2 px-4 rounded-md">
                                         Go to Items List
                                     </Link>
                                 </div>
