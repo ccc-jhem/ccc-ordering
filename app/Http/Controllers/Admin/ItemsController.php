@@ -15,11 +15,18 @@ class ItemsController extends Controller
     //
     public function index(Request $request)
     {
-        $items = Item::paginate(10); 
-        return Inertia::render('Admin/Items', [
+        $items = Item::where(['type'=>'Assembly'])->paginate(10); 
+        return Inertia::render('Admin/ItemPage/Items', [
             'items' => $items,
         ]);
     }
 
+    public function view(Request $request ,$id,$nsId)
+    {
+        $itemData = Item::where(['id' => $id, 'name' => $nsId])->first();
 
+        return Inertia::render('Admin/ItemPage/ViewItem', [
+            'itemData' => $itemData,
+        ]);
+    }
 }

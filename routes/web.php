@@ -51,6 +51,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Users controller
 
     Route::get('admin/item-list', [ItemsController::class, 'index']);
+    Route::get('admin/view-item/{id}/{nsId}', [ItemsController::class, 'view'])->name('admin.view-item');
 });
 
 

@@ -101,7 +101,7 @@ export default function Login({ status, canResetPassword }) {
                         
                     <Link
                         href={route('register')}
-                        className="inline-flex items-center px-4 py-2 bg-pink-900 border border-gray-300 rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                        className="inline-flex items-center px-4 py-2 bg-emerald-900 border border-gray-300 rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
                     >
                         Register
                     </Link>

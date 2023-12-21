@@ -9,7 +9,7 @@ export default function Items({ auth,items }) {
             <Head title="Items" />
             <div className="py-6 sm:py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white overflow-x-auto shadow-sm sm:rounded-lg">
                         <div className="p-4 sm:p-6 text-gray-900">
                             <div className="flex justify-between items-center">
                                 <h1 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -28,11 +28,11 @@ export default function Items({ auth,items }) {
                                 <table className="min-w-full">
                                     <thead>
                                         <tr>
-                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">NS-ID</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Description</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Type</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Category</th>
-                                            <th className="px-3 sm:px-6 py-3 bg-pink-700 border-b text-white text-center">Actions</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-cyan-700 border-b text-white text-center">NS-ID</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-cyan-700 border-b text-white text-center">Description</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-cyan-700 border-b text-white text-center">Type</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-cyan-700 border-b text-white text-center">Category</th>
+                                            <th className="px-3 sm:px-6 py-3 bg-cyan-700 border-b text-white text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,10 +44,10 @@ export default function Items({ auth,items }) {
                                                 <td className="px-3 sm:px-6 py-2 sm:py-3 whitespace-no-wrap border-b text-center">{item.category}</td>
                                                 <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-no-wrap border-b text-center">
                                                     <Link
-                                                        href={`/edit-item/${item.id}`}
-                                                        className="bg-pink-600 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1 inline-flex items-center text-center hover:bg-pink-800 focus:outline-none focus:ring focus:border-blue-300"
-                                                    >
-                                                    <span className="text-base">Edit</span>
+                                                         href={route('admin.view-item', { id: item.id, nsId: item.name })}
+                                                            className="bg-cyan-700 text-white px-2 sm:px-4 py-1 sm:py-2 rounded mx-1 inline-flex items-center text-center hover:bg-cyan-800 focus:outline-none focus:ring focus:border-blue-300"
+                                                        >
+                                                        <span className="text-base">View</span>
                                                     </Link>
                                                 </td>
                                             </tr>
@@ -62,7 +62,7 @@ export default function Items({ auth,items }) {
                                     <Link
                                         key={index}
                                         href={link.url}
-                                        className={`inline-block px-4 py-2 mr-2 bg-pink-800 text-white rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800 ${link.active ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                        className={`inline-block px-4 py-2 mr-2 bg-cyan-700 text-white rounded focus:outline-none focus:shadow-outline-blue active:bg-cyan-800 ${link.active ? 'opacity-70 cursor-not-allowed' : ''}`}
                                     >
                                         {link.label === '&laquo; Previous' ? 'Prev': link.label && link.label === 'Next &raquo;' ? 'Next' : link.label }
                                     </Link>

@@ -14,8 +14,8 @@ class UserController extends Controller
     //
     public function index()
     {
-        $users = User::where('role', '!=', 'admin')->get(); 
-        return Inertia::render('Admin/Users', [
+        $users = User::where('role', '!=', 'admin')->paginate(10); 
+        return Inertia::render('Admin/UserPage/Users', [
             'users' => $users,
         ]);
     }
@@ -24,7 +24,7 @@ class UserController extends Controller
     public function edit(Request $request,$id)
     {
         $userData = User::find($id);
-        return Inertia::render('Admin/EditUser', [
+        return Inertia::render('Admin/UserPage/EditUser', [
             'userData' => $userData,
         ]); 
     }
